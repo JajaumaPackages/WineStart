@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+exec /usr/bin/xinit /usr/libexec/WineStart/xinitrc -- \
+    /usr/bin/X :"$XDG_VTNR" vt"$XDG_VTNR" -keeptty -nolisten tcp

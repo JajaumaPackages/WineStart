@@ -1,0 +1,30 @@
+# Based on the original work by intelfx from
+# https://www.linux.org.ru/forum/general/10847050
+#
+# A copyright note of the original author follows intact:
+
+# Licensed under GPLv3.
+# Ivan Shapovalov <intelfx100@gmail.com>
+
+[Unit]
+Description=WineStart session on %I
+Requires=WineConsole.service
+After=WineConsole.service
+After=getty@%i.service
+After=systemd-user-sessions.service plymouth-quit-wait.service
+Conflicts=getty@%i.service
+
+[Service]
+ExecStart=/usr/libexec/WineStart/startx
+IgnoreSIGPIPE=no
+PAMName=login
+SELinuxContext=system_u:system_r:unconfined_service_t:s0
+StandardInput=tty-fail
+StandardOutput=tty
+TTYPath=/dev/%I
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+Type=simple
+User=WineStart
+UtmpIdentifier=%I

@@ -1,0 +1,10 @@
+[Unit]
+Description=Maintain console lock for WineStart
+Documentation=man:pam_console(8)
+ConditionPathExists=/var/run/console/
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/touch /var/run/console/WineStart
+ExecStop=/bin/rm -f /var/run/console/WineStart
